@@ -45,4 +45,16 @@ class Attention(nn.Module):
         self.dim=dim
         self.normfactor=dim**-0.5
 
+        self.to_qkv=nn.Linear(dim,dim*3,bias=True)
+        torch.nn.init.xavier_uniform_(self.to_qkv.weight)
+        torch.nn.init.zeros_(self.to_qkv.bias)
+
+        self.nn1=nn.Linear(dim,dim)
+        torch.nn.init.xavier_uniform_(self.nn1.weight)
+
+        torch.nn.init.zeros_(self.nn1.bias)
+        self.do1.nn.Dropout(dropout)
+
+    def forward(self,x,mask=None):
+        
         
